@@ -17,8 +17,21 @@
 
   a {
     display: block;
-    margin-bottom: .51rem;
+    margin-bottom: .5rem;
+    padding: 0 10px;
 
+    background: aliceblue;
+  }
+
+  details {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  summary {
+    color: #0076d1;
+    color: var(--links);
+    padding: 0 10px;
     background: aliceblue;
   }
 </style>
@@ -29,24 +42,28 @@
     <thead>
       <tr>
         <th>เรื่องที่พิจารณา</th>
+        <th></th>
         <th>ใบประมวลผลการลงมติ</th>
-        <th>ข้อมูลการประชุม</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="(d,i) in data" :key="i">
-        <td>
+        <td colspan="2">
           <p>{{d.title.join('\n')}}</p>
           <div><small>{{d.category}} {{d.no}}</small></div>
           <div><a
-              :href="'https://msbis.parliament.go.th/ewtadmin/ewt/parliament_report/main_warehouse_detail.php?mid='+i"><small>{{i}}</small></a>
+              :href="'https://msbis.parliament.go.th/ewtadmin/ewt/parliament_report/main_warehouse_detail.php?mid='+i"><small>รหัส
+                {{i}}</small></a>
           </div>
+          <details>
+            <summary>
+              <small>ข้อมูลการประชุม</small>
+            </summary>
+            <a v-for="([t,l]) in d.meeting_docs" :key="l" :href="l">{{t}}</a>
+          </details>
         </td>
         <td>
           <a v-for="([t,l]) in d.score_summary_docs" :key="l" :href="l">{{t}}</a>
-        </td>
-        <td>
-          <a v-for="([t,l]) in d.meeting_docs" :key="l" :href="l">{{t}}</a>
         </td>
       </tr>
     </tbody>
