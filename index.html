@@ -1,0 +1,57 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+
+<style>
+  body {
+    max-width: unset;
+    letter-spacing: .3px;
+    font-family: 'Sarabun', sans-serif;
+  }
+
+  table {
+    line-height: 1.8;
+  }
+
+  a {
+    display: block;
+    margin-bottom: .51rem;
+
+    background: aliceblue;
+  }
+</style>
+
+<div id="app">
+  <small>(ข้อมูลไม่ lazyload นะ อาจจะนานนิดนึง)</small>
+  <table>
+    <thead>
+      <tr>
+        <th>เรื่องที่พิจารณา</th>
+        <th>ใบประมวลผลการลงมติ</th>
+        <th>ข้อมูลการประชุม</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(d,i) in data" :key="i">
+        <td>
+          <p>{{d.title.join('\n')}}</p>
+          <div><small>{{d.category}} {{d.no}}</small></div>
+          <div><a
+              :href="'https://msbis.parliament.go.th/ewtadmin/ewt/parliament_report/main_warehouse_detail.php?mid='+i"><small>{{i}}</small></a>
+          </div>
+        </td>
+        <td>
+          <a v-for="([t,l]) in d.score_summary_docs" :key="l" :href="l">{{t}}</a>
+        </td>
+        <td>
+          <a v-for="([t,l]) in d.meeting_docs" :key="l" :href="l">{{t}}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="app.js" defer></script>
