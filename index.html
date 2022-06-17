@@ -43,22 +43,22 @@
       <tr>
         <th>เรื่องที่พิจารณา</th>
         <th></th>
-        <th>ใบประมวลผลการลงมติ</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(d,i) in data" :key="i">
+      <tr v-for="d in data" :key="d.id">
         <td colspan="2">
           <p>{{d.title.join('\n')}}</p>
           <div><small>{{d.category}} {{d.no}}</small></div>
           <div>
             <a
-              :href="'https://msbis.parliament.go.th/ewtadmin/ewt/parliament_report/main_warehouse_detail.php?mid='+i"
+              :href="'https://msbis.parliament.go.th/ewtadmin/ewt/parliament_report/main_warehouse_detail.php?mid='+d.id"
               target="_blank" rel="nofollow noopener noreferrer">
-              <small>รหัส {{i}}</small>
+              <small>รหัส {{d.id}}</small>
             </a>
           </div>
-          <details>
+          <details v-if="d.meeting_docs.length !== 0">
             <summary>
               <small>ข้อมูลการประชุม</small>
             </summary>
@@ -69,10 +69,15 @@
           </details>
         </td>
         <td>
-          <a v-for="([t,l]) in d.score_summary_docs" :key="l" :href="l"
-            target="_blank" rel="nofollow noopener noreferrer">
-            {{t}}
-          </a>
+          <details v-if="d.score_summary_docs.length !== 0">
+            <summary>
+              <small>ใบประมวลผลการลงมติ</small>
+            </summary>
+            <a v-for="([t,l]) in d.score_summary_docs" :key="l" :href="l"
+              target="_blank" rel="nofollow noopener noreferrer">
+              {{t}}
+            </a>
+          </details>
         </td>
       </tr>
     </tbody>

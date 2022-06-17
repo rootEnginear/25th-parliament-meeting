@@ -9,6 +9,6 @@ jsonConcat(
   (_err, json) => {
     if (_err) return console.error(_err);
     let data = JSON.stringify(json).replace(/\s+/g, " ");
-    fs.writeFileSync("all.json", data);
+    fs.writeFileSync("all_raw.json", data);
   }
 );
