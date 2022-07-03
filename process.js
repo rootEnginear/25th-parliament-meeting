@@ -1,51 +1,74 @@
-const fs = require('fs')
-const jsdom = require('jsdom')
-const { JSDOM } = jsdom
+import fs from 'fs';
+import jsdom from 'jsdom';
+const { JSDOM } = jsdom;
 
-const raw_data = require('./all_raw.json')
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const raw_data = require('./src/data/all_raw.json');
+
+const formatString = (str) => {
+	return str
+		.replace(/๐/g, '0')
+		.replace(/๑/g, '1')
+		.replace(/๒/g, '2')
+		.replace(/๓/g, '3')
+		.replace(/๔/g, '4')
+		.replace(/๕/g, '5')
+		.replace(/๖/g, '6')
+		.replace(/๗/g, '7')
+		.replace(/๘/g, '8')
+		.replace(/๙/g, '9')
+		.replace(/\u00a0/g, ' ')
+		.replace(/\u2013/g, '-')
+		.replace(/\\n/g, ' ')
+		.replace(/\\t/g, ' ')
+		.replace(/\u201c/g, '\\"')
+		.replace(/\u201d/g, '\\"')
+		.replace(/\s+/g, ' ')
+		.trim();
+};
 
 const process = () => {
-	let data = []
-	for (entry in raw_data) {
-		const { document } = new JSDOM(raw_data[entry]).window
+	let data = [];
+	for (let entry in raw_data) {
+		const { document } = new JSDOM(raw_data[entry]).window;
 
-		/*
-    สิ่งที่หา:
-    1. ชุดเท่าไร ปีไหน สมัยไหน — อยู่ที่ `table > tbody > tr:nth-child(2)`
-    2. ครั้งที่ วันที่ เวลา — อยู่ที่ `table > tbody > tr:nth-child(3)`
-    3. เรื่องที่พิจารณา — อยู่ที่ `#mydetail > td`[0].children -> map(innerText) // ใช้ innertext เพราะจะเอา \n
-    4. ใบประมวลผลการลงมติ — อยู่ที่ `#mydetail_o > td > ul > li > a[target]`
-    5. ข้อมูลการประชุม — อยู่ที่ `table > tbody > tr > td > a[target]`
+		//  1. ชุดเท่าไร ปีไหน สมัยไหน — อยู่ที่ `table > tbody > tr:nth-child(2)`
+		const category = formatString(
+			document.querySelector('table > tbody > tr:nth-child(2)').textContent
+		);
 
-    Note:
-    - ลิงก์ที่มี target คือ ลิงก์ที่กดไปดูไฟล์ได้
-    - อย่าลืมปรับ domain ของลิงก์ด้วย โดยการ "https://msbis.parliament.go.th/ewtadmin/ewt/parliament_report/" + href
-  */
-		const category = document.querySelector('table > tbody > tr:nth-child(2)').textContent.trim()
-		const no = document.querySelector('table > tbody > tr:nth-child(3)').textContent.trim()
+		// 2. ครั้งที่ วันที่ เวลา — อยู่ที่ `table > tbody > tr:nth-child(3)`
+		const no = formatString(document.querySelector('table > tbody > tr:nth-child(3)').textContent);
+
+		// 3. เรื่องที่พิจารณา — อยู่ที่ `#mydetail > td`[0].children -> map(innerText) // ใช้ innertext เพราะจะเอา \n
 		const title = [...document.querySelectorAll('#mydetail > td:first-of-type > *')]
-			.map((el) => el.textContent.trim())
-			.filter((el) => el.length > 0)
+			.map((el) => formatString(el.textContent))
+			.filter((el) => el.length > 0);
+
+		// 4. ใบประมวลผลการลงมติ — อยู่ที่ `#mydetail_o > td > ul > li > a[target]`
 		const score_summary_docs = [...document.querySelectorAll('#mydetail_o > td > ul > li')].map(
 			(el) => {
-				const hasLink = el.querySelector('a[target]')
+				const hasLink = el.querySelector('a[target]');
 				if (hasLink)
 					return [
-						hasLink.textContent.trim(),
+						formatString(hasLink.textContent),
 						(
 							'https://msbis.parliament.go.th/ewtadmin/ewt/parliament_report/' +
 							hasLink.href.replace('../parliament_report/', '')
-						).trim(),
-					]
-				return el.textContent.trim()
+						).trim()
+					];
+				return formatString(el.textContent);
 			}
-		)
+		);
+
+		// 5. ข้อมูลการประชุม — อยู่ที่ `table > tbody > tr > td > a[target]`
 		const meeting_docs = [...document.querySelectorAll('table > tbody > tr > td > a[target]')].map(
 			(el) => [
-				el.textContent.trim(),
-				('https://msbis.parliament.go.th/ewtadmin/ewt/parliament_report/' + el.href).trim(),
+				formatString(el.textContent),
+				('https://msbis.parliament.go.th/ewtadmin/ewt/parliament_report/' + el.href).trim()
 			]
-		)
+		);
 
 		data.push({
 			id: entry,
@@ -53,35 +76,14 @@ const process = () => {
 			no,
 			title,
 			score_summary_docs,
-			meeting_docs,
-		})
+			meeting_docs
+		});
 	}
 
-	formatted_data = JSON.stringify(
-		JSON.parse(
-			JSON.stringify(data)
-				.replace(/๐/g, '0')
-				.replace(/๑/g, '1')
-				.replace(/๒/g, '2')
-				.replace(/๓/g, '3')
-				.replace(/๔/g, '4')
-				.replace(/๕/g, '5')
-				.replace(/๖/g, '6')
-				.replace(/๗/g, '7')
-				.replace(/๘/g, '8')
-				.replace(/๙/g, '9')
-				.replace(/\u00a0/g, ' ')
-				.replace(/\u2013/g, '-')
-				.replace(/\\n/g, ' ')
-				.replace(/\\t/g, ' ')
-				.replace(/\u201c/g, '\\"')
-				.replace(/\u201d/g, '\\"')
-				.replace(/\s+/g, ' ')
-		),
-		null,
-		2
-	)
+	data = data.sort((a, z) => z.id - a.id);
 
-	fs.writeFileSync('all_parsed.json', formatted_data)
-}
-process()
+	let formatted_data = JSON.stringify(data);
+
+	fs.writeFileSync('src/data/all_parsed.json', formatted_data);
+};
+process();

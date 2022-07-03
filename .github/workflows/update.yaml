@@ -1,4 +1,4 @@
-name: Update Data
+name: Update Data & Rebuild Svelte Page
 
 on:
   push:
@@ -19,3 +19,12 @@ jobs:
         run: yarn process
       - name: Commit Change
         uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Build
+        run: yarn build
+      - name: Deploy
+        uses: s0/git-publish-subdir-action@v2.3.0
+        env:
+          REPO: self
+          BRANCH: pages
+          FOLDER: build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
