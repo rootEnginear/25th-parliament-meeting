@@ -1,14 +1,14 @@
 {
-  "name": "msbis",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "jsdom": "^19.0.0",
-    "json-concat": "^0.0.1"
-  },
-  "scripts": {
-    "combine": "node combine.js",
-    "process": "node process.js"
-  }
+	"name": "msbis",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"dependencies": {
+		"jsdom": "^19.0.0",
+		"node-fetch": "2"
+	},
+	"scripts": {
+		"process": "node process.js",
+		"fetch": "node fetch.js"
+	}
 }

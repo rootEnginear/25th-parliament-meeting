@@ -1,0 +1,21 @@
+name: Update Data
+
+on:
+  push
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  update_data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Fetch
+        run: |
+          yarn
+          yarn fetch
+      - name: Process
+        run: yarn process
+      - name: Commit Change
+        uses: stefanzweifel/git-auto-commit-action@v4

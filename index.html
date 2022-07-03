@@ -49,7 +49,7 @@
     <tbody>
       <tr v-for="d in data" :key="d.id">
         <td colspan="2">
-          <p>{{d.title.join('\n')}}</p>
+          <p style="white-space:pre-wrap">{{d.title.join('\n')}}</p>
           <div><small>{{d.category}} {{d.no}}</small></div>
           <div>
             <a
@@ -73,10 +73,12 @@
             <summary>
               <small>ใบประมวลผลการลงมติ</small>
             </summary>
-            <a v-for="([t,l]) in d.score_summary_docs" :key="l" :href="l"
-              target="_blank" rel="nofollow noopener noreferrer">
-              {{t}}
-            </a>
+            <template v-for="(m) in d.score_summary_docs">
+              <strong v-if="typeof(m) === 'string'">{{m}}</strong>
+              <a v-else :href="m[1]" target="_blank" rel="nofollow noopener noreferrer">
+                {{m[0]}}
+              </a>
+            </template>
           </details>
         </td>
       </tr>
