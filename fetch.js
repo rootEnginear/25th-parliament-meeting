@@ -1,4 +1,5 @@
 import fs from 'fs';
+import fetch from 'node-fetch';
 import all_raw from './src/data/all_raw.json' assert { type: 'json' };
 import current_position from './pos.json' assert { type: 'json' };
 
