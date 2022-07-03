@@ -18,6 +18,12 @@ main {
   padding: 16px 32px;
 }
 
+.instruction {
+  display:block;
+  line-height: 16px;
+  height: 16px;
+}
+
 article {
   border: 2px solid #000;
   padding: 16px 16px 8px;

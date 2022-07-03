@@ -11,6 +11,9 @@
 	};
 </script>
 
+<small class="instruction">
+	วิธีการใช้: <kbd>CTRL+F</kbd> หาของที่อยากหาได้เลย ไม่ควรใช้ Scrollbar
+</small>
 {#each data as d (d.id)}
 	<article itemscope itemtype="https://schema.org/Report">
 		{#if d.title.length !== 0}
