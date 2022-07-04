@@ -59,5 +59,5 @@
 		</h1>
 	</article>
 {/each}
-<button class="gotop" type="button" on:click={goTop}>⭱</button>
-<button class="gobottom" type="button" on:click={goBottom}>⭳</button>
+<button class="gotop" type="button" on:click={goTop}>⏫&#xFE0E;</button>
+<button class="gobottom" type="button" on:click={goBottom}>⏬&#xFE0E;</button>
