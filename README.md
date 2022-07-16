@@ -1,5 +1,7 @@
 # 25th-parliament-meeting
 
+![GitHub last commit](https://img.shields.io/github/last-commit/rootEnginear/25th-parliament-meeting?label=latest%20update)
+
 สรุปข้อมูลการประชุมสภาผู้แทนราษฎร ชุดที่ 25 หยาบๆ
 
 คือไม่มีอะไร เนื่องจากเว็บฐานข้อมูลมันทำ AJAX แล้วมัน Search ใน Google ไม่ขึ้น ก็เลยดึงมาให้หมดเลยจะได้ `Ctrl+F` ง่ายๆ
