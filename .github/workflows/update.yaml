@@ -3,7 +3,7 @@ name: Update Data & Rebuild Svelte Page
 on:
   push:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 11 * * 1-5'
 
 jobs:
   main:
