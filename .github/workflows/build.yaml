@@ -1,0 +1,27 @@
+name: Build Svelte Page
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/data/all_raw.json' # This file is too large to diff so Git will commit everytime.
+  workflow_dispatch:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Init
+        run: yarn
+      - name: Build
+        run: yarn build
+      - name: Deploy
+        uses: s0/git-publish-subdir-action@v2.3.0
+        env:
+          REPO: self
+          BRANCH: page
+          FOLDER: build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

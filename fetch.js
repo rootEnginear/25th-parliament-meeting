@@ -35,8 +35,9 @@ const getData = async (arr) => {
 	const json_data = ne_data.reduce((a, c) => ({ ...a, [c[0]]: c[1] }), {});
 	const max = Math.max(...Object.keys(json_data)) + 1;
 
-	// ถ้าไม่ได้มีอะไรอัพเดตเพิ่ม ข้ามไปเลย
-	if (current_position.next === max) throw new Error('No new data');
+	// ถ้าไม่ได้บังคับดึงข้อมูล และ ไม่ได้มีอะไรอัพเดตเพิ่ม — หยุดเลย
+	if (process.argv[2] !== '--force' && current_position.next === max)
+		throw new Error('No new data');
 
 	fs.writeFileSync(
 		'pos.json',

@@ -13,7 +13,8 @@
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
 		"format": "prettier --write --plugin-search-dir=. .",
 		"process": "node process.js",
-		"fetch": "node fetch.js"
+		"fetch": "node fetch.js",
+		"force-fetch": "node fetch.js --force"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^1.0.0-next.36",
