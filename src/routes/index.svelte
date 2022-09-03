@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 
 	let article: HTMLElement[] = [];
-	let highlighted_p: HTMLElement[] = [];
+	let highlighted_el: HTMLElement[] = [];
 	let search_text = '';
 	let search_btn_label = 'Loading...';
 
@@ -18,29 +18,56 @@
 	};
 
 	const walkParagraph = () => {
+		let i, j;
 		search_btn_label = 'Marking...';
-		const words = search_text.trim().split(' ');
+		const tokenized_search_list = [
+			...new Set(
+				search_text
+					.split(' ')
+					.map((e) => e.replace(/_/g, ' ').replace(/\\ /g, '_').trim())
+					.filter((e) => e)
+			)
+		];
 
-		highlighted_p.forEach((e) => e.classList.remove('highlight'));
-		highlighted_p = [];
+		const some: string[] = [];
+		const must: string[] = [];
+		const no: string[] = [];
 
-		if (search_text.trim() !== '') {
-			article.forEach((e) => {
-				try {
-					let text_temp = e.textContent;
-					for (const word of words) {
-						if (!text_temp?.includes(word)) throw new Error();
-					}
-					// pass
-					e.classList.add('highlight');
-					highlighted_p.push(e);
-				} catch (e) {
-					// has no match - skipped
-				}
-			});
+		for (i = 0; i < tokenized_search_list.length; i++) {
+			const term = tokenized_search_list[i];
+			if (term[0] === '+') {
+				must.push(term.substring(1));
+			} else if (term[0] === '-') {
+				no.push(term.substring(1));
+			} else {
+				some.push(term);
+			}
 		}
 
-		if (highlighted_p[0]) highlighted_p[0].parentElement?.scrollIntoView();
+		highlighted_el.forEach((e) => e.classList.remove('highlight'));
+		highlighted_el = [];
+
+		console.log(must, no, some);
+		if (some.length + must.length + no.length !== 0) {
+			article_loop: for (i = 0; i < article.length; i++) {
+				const content = article[i].textContent;
+				for (j = 0; j < no.length; j++) {
+					if (content?.includes(no[j])) continue article_loop;
+				}
+				for (j = 0; j < must.length; j++) {
+					if (!content?.includes(must[j])) continue article_loop;
+				}
+				for (j = 0; j < some.length; j++) {
+					if (content?.includes(some[j])) break;
+				}
+				if (j === some.length) continue article_loop;
+
+				article[i].classList.add('highlight');
+				highlighted_el.push(article[i]);
+			}
+		}
+
+		if (highlighted_el[0]) highlighted_el[0].scrollIntoView();
 
 		window.queueMicrotask(() => {
 			search_btn_label = 'Marked';
