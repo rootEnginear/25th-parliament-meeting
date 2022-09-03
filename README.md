@@ -1,6 +1,9 @@
 # 25th-parliament-meeting
 
-![GitHub last commit](https://img.shields.io/github/last-commit/rootEnginear/25th-parliament-meeting?label=latest%20update)
+![GitHub last commit](https://img.shields.io/github/last-commit/rootEnginear/25th-parliament-meeting/page?label=latest%20update)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rootEnginear/25th-parliament-meeting/Update%20Data?label=fetch%20status)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rootEnginear/25th-parliament-meeting/Build%20Svelte%20Page?label=build%20status)
+![GitHub deployments](https://img.shields.io/github/deployments/rootEnginear/25th-parliament-meeting/github-pages?label=deploy%20status)
 
 สรุปข้อมูลการประชุมสภาผู้แทนราษฎร ชุดที่ 25 หยาบๆ
 
