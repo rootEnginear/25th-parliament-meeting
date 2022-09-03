@@ -112,7 +112,7 @@ a:hover {
 	text-decoration: underline;
 }
 
-strong {
+strong.header {
 	display: block;
 	margin: 0 0 8px;
 }
@@ -188,4 +188,17 @@ input {
 
 .search-container > button {
 	min-width: 8ch;
+}
+
+dialog {
+	position: fixed;
+	inset: 0 32px;
+	z-index: 5;
+
+	background: white;
+}
+
+ol,
+ul {
+	list-style-position: inside;
 }
