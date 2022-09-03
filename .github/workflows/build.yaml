@@ -4,8 +4,10 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'src/data/all_raw.json' # This file is too large to diff so Git will commit everytime.
+  workflow_run:
+    workflows: [Update Data]
+    types:
+      - completed
   workflow_dispatch:
 
 jobs:
