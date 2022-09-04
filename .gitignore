@@ -111,3 +111,4 @@ dist
 .env.*
 !.env.example
 local/
+.output/

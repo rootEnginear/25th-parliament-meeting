@@ -1,11 +1,11 @@
-name: Build Svelte Page
+name: build-astro-page
 
 on:
   push:
     branches:
       - main
   workflow_run:
-    workflows: [Update Data]
+    workflows: [update-data]
     types:
       - completed
   workflow_dispatch:
@@ -25,5 +25,5 @@ jobs:
         env:
           REPO: self
           BRANCH: page
-          FOLDER: build
+          FOLDER: dist
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

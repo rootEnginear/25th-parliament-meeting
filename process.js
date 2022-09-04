@@ -1,10 +1,7 @@
 import fs from 'fs';
 import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
-
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const raw_data = require('./src/data/all_raw.json');
+import raw_data from './src/data/all_raw.json' assert { type: 'json' };
 
 const formatString = (str) => {
 	return str

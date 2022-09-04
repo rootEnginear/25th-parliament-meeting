@@ -1,8 +1,8 @@
 # 25th-parliament-meeting
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/rootEnginear/25th-parliament-meeting/page?label=latest%20update)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rootEnginear/25th-parliament-meeting/Update%20Data?label=fetch%20status)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rootEnginear/25th-parliament-meeting/Build%20Svelte%20Page?label=build%20status)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rootEnginear/25th-parliament-meeting/update-data?label=fetch%20status)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rootEnginear/25th-parliament-meeting/build-astro-page?label=build%20status)
 ![GitHub deployments](https://img.shields.io/github/deployments/rootEnginear/25th-parliament-meeting/github-pages?label=deploy%20status)
 
 สรุปข้อมูลการประชุมสภาผู้แทนราษฎร ชุดที่ 25 หยาบๆ
@@ -11,39 +11,21 @@
 
 ไม่แสวงหากำไรนาจา แค่เอาข้อมูลจากฐานข้อมูลมาวางให้ `Ctrl+F` ง่ายๆ เฉยๆ
 
-powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Powered by [Astro](https://astro.build) 🚀
 
-## Creating a project
+## 🧞 Commands
 
-If you're seeing this, you've probably already done this step. Congrats!
+All commands are run from the root of the project, from a terminal:
 
-```bash
-# create a new project in the current directory
-npm init svelte
+| Command                | Action                                             |
+| :--------------------- | :------------------------------------------------- |
+| `npm install`          | Installs dependencies                              |
+| `npm run dev`          | Starts local dev server at `localhost:3000`        |
+| `npm run build`        | Build your production site to `./dist/`            |
+| `npm run preview`      | Preview your build locally, before deploying       |
+| `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
+| `npm run astro --help` | Get help using the Astro CLI                       |
 
-# create a new project in my-app
-npm init svelte my-app
-```
+## 👀 Want to learn more?
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

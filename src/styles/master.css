@@ -17,13 +17,16 @@ body {
 }
 
 main {
-	margin: 0 auto;
+	margin: 48px auto 0;
 	padding: 0 32px;
 }
 
 .instruction {
-	position: sticky;
+	position: fixed;
 	top: 0;
+	left: 0;
+	right: 0;
+
 	padding: 0 32px;
 
 	min-height: 32px;
@@ -55,7 +58,6 @@ h1 {
 }
 
 p {
-	white-space: pre-wrap;
 	margin: 0 0 8px;
 }
 
@@ -115,10 +117,6 @@ a:hover {
 strong.header {
 	display: block;
 	margin: 0 0 8px;
-}
-
-button {
-	cursor: pointer;
 }
 
 .gotop,
@@ -201,4 +199,8 @@ dialog {
 ol,
 ul {
 	list-style-position: inside;
+}
+
+button {
+	cursor: pointer !important;
 }
