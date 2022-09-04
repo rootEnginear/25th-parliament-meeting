@@ -8,6 +8,12 @@ export default defineConfig({
 	base: '/25th-parliament-meeting',
 	integrations: [
 		compress({
+			html: {
+				collapseWhitespace: true,
+				ignoreCustomFragments: [/<p itemprop="articleBody">[\S\s]+?<\/p>/],
+				removeComments: true,
+				removeRedundantAttributes: true
+			},
 			img: false
 		})
 	]

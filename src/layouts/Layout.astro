@@ -13,15 +13,18 @@ import '../styles/master.css'
 	<link rel="dns-prefetch" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap"
-		rel="stylesheet">
 
-	<link rel="preconnect" href="https://cdnjs.cloudflare.com">
-	<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-	<link rel='stylesheet'
-		href='https://cdnjs.cloudflare.com/ajax/libs/reseter.css/2.0.0/reseter.min.css'
-		integrity='sha512-gCJkkUMGTe73+FMwog6gIBCVJIMXRoc21l6/IPCuzxCex/1sxvO8ctb6Zd4/WWs2UMqmtnDrAdhJht5pEY0LXg=='
-		crossorigin='anonymous' />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap"
+		rel="stylesheet"
+		media="print"
+	>
+	<noscript>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap"
+			rel="stylesheet"
+		>
+	</noscript>
 
 	<link rel="icon" type="image/svg+xml" href="/25th-parliament-meeting/favicon.svg">
 	<link rel="icon" type="image/png" href="/25th-parliament-meeting/favicon.png">
@@ -54,6 +57,7 @@ import '../styles/master.css'
 
 <body>
 	<slot />
+	<script is:inline src="script.js" defer></script>
 </body>
 
 </html>

@@ -1,6 +1,103 @@
-* {
+/* Resetter */
+*,
+::after,
+::before {
 	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
 }
+
+html {
+	line-height: 1.15;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+main {
+	display: block;
+}
+
+h1 {
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+
+a {
+	background-color: transparent;
+}
+
+kbd {
+	font-family: monospace;
+	font-size: 1em;
+}
+
+button,
+input {
+	line-height: inherit;
+	border: 1px solid currentColor;
+}
+
+button {
+	overflow: visible;
+	text-transform: none;
+}
+
+button {
+	-webkit-appearance: button;
+	padding: 1px 6px;
+}
+
+input {
+	overflow: visible;
+}
+
+input {
+	padding: 1px;
+}
+
+::-webkit-input-placeholder {
+	color: inherit;
+	opacity: 0.5;
+}
+
+hr {
+	box-sizing: content-box;
+	height: 0;
+	color: inherit;
+	overflow: visible;
+}
+
+details {
+	display: block;
+}
+
+dialog {
+	background-color: inherit;
+	border: solid;
+	color: inherit;
+	display: block;
+	height: -webkit-fit-content;
+	height: -moz-fit-content;
+	height: fit-content;
+	left: 0;
+	margin: auto;
+	padding: 1em;
+	position: absolute;
+	right: 0;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+}
+
+dialog:not([open]) {
+	display: none;
+}
+
+summary {
+	display: list-item;
+}
+
+/* Custom */
 
 html {
 	font-size: 14px;
@@ -29,7 +126,7 @@ main {
 
 	padding: 0 32px;
 
-	min-height: 32px;
+	height: 32px;
 
 	background: #000;
 
@@ -40,6 +137,28 @@ main {
 	justify-content: space-between;
 
 	z-index: 1;
+
+	overflow: auto;
+	scrollbar-color: #333 #222;
+	scrollbar-width: thin;
+}
+
+.instruction::-webkit-scrollbar {
+	height: 10px;
+	width: 10px;
+}
+
+.instruction::-webkit-scrollbar-track {
+	background: #000;
+}
+
+.instruction::-webkit-scrollbar-thumb {
+	background: #777;
+	border-radius: 6px;
+}
+
+.instruction::-webkit-scrollbar-thumb:hover {
+	background: #aaa;
 }
 
 article {
@@ -58,6 +177,7 @@ h1 {
 }
 
 p {
+	white-space: pre-line;
 	margin: 0 0 8px;
 }
 
