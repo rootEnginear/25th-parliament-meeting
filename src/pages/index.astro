@@ -5,21 +5,21 @@ import data from '../data/all_parsed.json'
 
 <Layout>
 	<div class="instruction">
-		<span class="instruction-text">
-			<span class="b">วิธีการใช้:</span> กด <kbd>CTRL+F</kbd> แล้วหาคำที่ต้องการ หรือใช้กล่องทางขวา — ไม่ควรใช้
-			Scrollbar
-		</span>
-		<span>กล่องค้นหาละเอียด <button onclick="showInstruction()">วิธีใช้</button></span>
-		<div class="search-container">
-			<input id="search-input" type="text" placeholder="ไม่ไว้วางใจ +ประยุทธ์ -ประวิทย์" />
-			<button id="search-btn" type="button" >Loading...</button>
-		</div>
+		<span>ค้นหา</span>
+		<input id="search-input" type="text" placeholder="ไม่ไว้วางใจ +ประยุทธ์ -ประวิทย์" disabled/>
+		<button id="search-btn" type="button" disabled>...</button>
+		<span>อันที่ <span id="search-current">0</span> จาก <span id="search-all">0</span></span>
+		<button id="prev-btn" type="button" onclick="gotoPrevSearch()" disabled>ก่อนหน้า</button>
+		<button id="focus-btn" type="button" onclick="scrollCurrentIntoView()" disabled>โฟกัส</button>
+		<button id="next-btn" type="button" onclick="gotoNextSearch()" disabled>ถัดไป</button>
+		<span class="instruction-end">ไม่ควรใช้ Scrollbar</span>
+		<button id="howto-btn" onclick="showInstruction()" disabled>วิธีใช้กล่องค้นหา</button>
 	</div>
 	<dialog id="instruction-dialog">
-		<h1 class="b">วิธีการใช้กล่องค้นหาละเอียด</h1>
+		<h1 class="b">รายละเอียดกล่องค้นหาละเอียด</h1>
 		<ol>
 			<li>
-				ใส่คำค้นหาที่ต้องการ
+				ใส่คำค้นหาที่ต้องการ แล้วกด "ค้นหา"
 				<ul>
 					<li>"คำค้นหา" สามารถมีกี่คำก็ได้ โดยแยกด้วยการเว้นวรรค เช่น "ไม่ไว้วางใจ ชลน่าน"</li>
 					<li>หากต้องการใส่ช่องว่างลงในคำค้นหา ให้ใช้เครื่องหมาย _ เช่น "รังสิมันต์_โรม"</li>
@@ -40,10 +40,11 @@ import data from '../data/all_parsed.json'
 					</li>
 				</ul>
 			</li>
-			<li>กด Mark — มติทุกอันที่ตรงตามเงื่อนไขจะมีสัญลักษณ์ <span class="hash" /> ปรากฏขึ้นมา</li>
-			<li>ใช้กล่องค้นหาของเบราเซอร์ (<kbd>CTRL+F</kbd>) ค้นหาตัวอักษร <span class="hash" /></li>
+			<li>ในการเลื่อนไปที่อันถัดไป สามารถใช้ปุ่ม "ก่อนหน้า" หรือ "ถัดไป" ได้ ถ้าไม่ขึ้น ลองกด "โฟกัส" ย้ำๆ ดู</li>
 		</ol>
-		<form method="dialog">
+		<hr>
+		<form method="dialog" class="dialog-form">
+			<small>Build: {Date.now().toString(36)}</small>
 			<button>ปิด</button>
 		</form>
 	</dialog>

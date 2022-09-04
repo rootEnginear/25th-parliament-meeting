@@ -134,7 +134,7 @@ main {
 
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	gap: 8px;
 
 	z-index: 1;
 
@@ -271,6 +271,7 @@ strong.header {
 
 article.highlight {
 	background: #ffe;
+	box-shadow: 0 0 0 6px #fd03;
 }
 
 .custom-search-marker {
@@ -304,14 +305,13 @@ input {
 	padding: 1px 8px;
 }
 
-.search-container > button {
-	min-width: 8ch;
-}
-
 dialog {
 	position: fixed;
 	inset: 0 32px;
+	padding: 16px;
 	z-index: 5;
+
+	border: 2px solid #000;
 
 	background: white;
 }
@@ -323,4 +323,14 @@ ul {
 
 button {
 	cursor: pointer !important;
+}
+
+.dialog-form {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.instruction-end {
+	margin-left: auto;
 }
