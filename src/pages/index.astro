@@ -52,13 +52,13 @@ import data from '../data/all_parsed.json'
 		{data.map(d => (
 			<article itemscope itemtype="https://schema.org/Report">
 				{d.title.length !== 0 && (
-					<p itemprop="articleBody"><span class="custom-search-marker" role="none">#</span>{d.title.join('\n')}</p>
+					<p itemprop="articleBody"><span class="custom-search-marker" role="none">#</span><Fragment set:html={d.title.join('\n')} /></p>
 				)}
 				{d.score_summary_docs.length !== 0 && (
 					<details>
 						<summary>ใบประมวลผลการลงมติ (เช็คคนมา, ผลโหวตแต่ละเรื่อง)</summary>
-						{d.score_summary_docs.map(m => typeof m === 'string' ? (
-							<strong class="header">{m}</strong>
+						{d.score_summary_docs.map((m:string[]|string) => typeof m === 'string' ? (
+							<strong class="block">{m}</strong>
 						) : (
 							<a href={m[1]} target="_blank" rel="nofollow noopener noreferrer">
 								{m[0]}
@@ -70,7 +70,7 @@ import data from '../data/all_parsed.json'
 				{d.meeting_docs.length !== 0 && (
 					<details>
 						<summary>ข้อมูลการประชุม (บันทึกการประชุม)</summary>
-						{d.meeting_docs.map(([t,l]) => (
+						{d.meeting_docs.map(([t,l]:string[]) => (
 							<a href={l} target="_blank" rel="nofollow noopener noreferrer">
 								{t}
 							</a>
