@@ -1,0 +1,20 @@
+name: debug
+
+on:
+  push:
+    branches:
+      - main
+  workflow_run:
+    workflows: [update-data]
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print github context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+          run: echo "$GITHUB_CONTEXT"
