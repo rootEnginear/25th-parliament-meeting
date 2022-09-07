@@ -15,12 +15,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         uses: actions/checkout@v3
       - name: Init
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         run: yarn
       - name: Build
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         run: yarn build
       - name: Deploy
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         uses: s0/git-publish-subdir-action@v2.3.0
         env:
           REPO: self
